@@ -37,7 +37,6 @@ import (
 	"github.com/projectcalico/calico/felix/buildinfo"
 	"github.com/projectcalico/calico/felix/calc"
 	"github.com/projectcalico/calico/felix/config"
-	_ "github.com/projectcalico/calico/felix/config"
 	dp "github.com/projectcalico/calico/felix/dataplane"
 	"github.com/projectcalico/calico/felix/jitter"
 	"github.com/projectcalico/calico/felix/logutils"

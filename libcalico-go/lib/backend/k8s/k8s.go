@@ -356,6 +356,27 @@ func CreateKubernetesClientset(ca *apiconfig.CalicoAPIConfigSpec) (*rest.Config,
 	// efficiently. The IPAM code can create bursts of requests to the API, so
 	// in order to keep pod creation times sensible we allow a higher request rate.
 	config.Burst = 100
+
+	// Overwrite the burst if provided. Default burst is 100.
+	if ca.K8sClientBurst != 0 {
+		config.Burst = ca.K8sClientBurst
+	}
+	// Overwrite the timeout if provided.
+	if ca.K8sClientTimeout != 0 {
+		config.Timeout = ca.K8sClientTimeout
+	}
+	// Overwrite the response accept content-type if provided.
+	if ca.K8sClientAcceptContentTypes != "" {
+		config.AcceptContentTypes = ca.K8sClientAcceptContentTypes
+	}
+	// Overwrite the request content-type if provided.
+	if ca.K8sClientContentType != "" {
+		config.ContentType = ca.K8sClientContentType
+	}
+	// Overwrite the user-agent if provided.
+	if ca.K8sClientUserAgent != "" {
+		config.UserAgent = ca.K8sClientUserAgent
+	}
 	cs, err := kubernetes.NewForConfig(config)
 	if err != nil {
 		return nil, nil, resources.K8sErrorToCalico(err, nil)
