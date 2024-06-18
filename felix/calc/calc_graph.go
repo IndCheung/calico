@@ -428,9 +428,9 @@ func NewCalculationGraph(callbacks PipelineCallbacks, conf *config.Config, liveC
 	//         |
 	//      <dataplane>
 	//
-	configBatcher := NewConfigBatcher(hostname, callbacks)
-	configBatcher.RegisterWith(allUpdDispatcher)
-	cg.configBatcher = configBatcher
+	//configBatcher := NewConfigBatcher(hostname, callbacks)
+	//configBatcher.RegisterWith(allUpdDispatcher)
+	//cg.configBatcher = configBatcher
 
 	// The profile decoder identifies objects with special dataplane significance which have
 	// been encoded as profiles by libcalico-go. At present this includes Kubernetes Service
