@@ -402,6 +402,13 @@ type Config struct {
 
 	Variant string `config:"string;Calico"`
 
+	KubeClientQPS                float64       `config:"float;5"`
+	KubeClientBurst              int           `config:"int;10"`
+	KubeClientTimeout            time.Duration `config:"seconds;0"`
+	KubeClientContentType        string        `config:"string;"`
+	KubeClientAcceptContentTypes string        `config:"string;"`
+	KubeClientUserAgent          string        `config:"string;calico-felix"`
+
 	// Configures MTU auto-detection.
 	MTUIfacePattern *regexp.Regexp `config:"regexp;^((en|wl|ww|sl|ib)[Pcopsvx].*|(eth|wlan|wwan).*)"`
 

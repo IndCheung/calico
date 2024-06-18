@@ -287,6 +287,21 @@ configRetry:
 		// config.  We don't need to re-load the configuration _again_ because the
 		// calculation graph will spot if the config has changed since we were initialised.
 		datastoreConfig = configParams.DatastoreConfig()
+		// get customized kube client options
+		var (
+			customizedQPS               = float32(configParams.KubeClientQPS)
+			customizedBurst             = configParams.KubeClientBurst
+			customizedTimeout           = configParams.KubeClientTimeout
+			customizedAcceptContentType = configParams.KubeClientAcceptContentTypes
+			customizedContentType       = configParams.KubeClientContentType
+			customizedUserAgent         = configParams.KubeClientUserAgent
+		)
+		datastoreConfig.Spec.K8sClientQPS = customizedQPS
+		datastoreConfig.Spec.K8sClientBurst = customizedBurst
+		datastoreConfig.Spec.K8sClientTimeout = customizedTimeout
+		datastoreConfig.Spec.K8sClientAcceptContentTypes = customizedAcceptContentType
+		datastoreConfig.Spec.K8sClientContentType = customizedContentType
+		datastoreConfig.Spec.K8sClientUserAgent = customizedUserAgent
 		backendClient, err = backend.NewClient(datastoreConfig)
 		if err != nil {
 			log.WithError(err).Error("Failed to (re)connect to datastore")
